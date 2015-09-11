@@ -12,25 +12,53 @@
         <h1>AngularJS Testing</h1>
       </section>
       <section>
-        <h2>Keyboard Interaction</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-keys">bespoke-keys</a></h3>
-      </section>
-      <section>
-        <h2>Touch Interaction</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-touch">bespoke-touch</a></h3>
-      </section>
-      <section>
-        <h2>Responsive Slides</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-scale">bespoke-scale</a></h3>
-      </section>
-      <section>
-        <h2>Bullet List</h2>
-        <h3 class="bullet">Powered by <a href="https://github.com/markdalgleish/bespoke-bullets">bespoke-bullets</a></h3>
+        <h2>Why should I test?</h2>
+        <h3 class="bullet"></h3>
         <ul>
-          <li>Bullet 1</li>
-          <li>Bullet 2</li>
-          <li>Bullet 3</li>
+          <li>Reliability</li>
+          <li>Maintainability</li>
+          <li>Collaboration</li>
         </ul>
+      </section>
+      <section>
+        <h2>What is Test Driven Development (TDD)?</h2>
+        <h3 class="bullet"></h3>
+        <ul>
+          <li><img src="https://lh5.googleusercontent.com/-2avOSLXBtRo/VVF97CVqKlI/AAAAAAAABcc/wYjDPRC0CFk/w638-h86-no/Untitled%2Bdrawing.png"></li>
+          <li>Behavior Driven Development (BDD)?</li>
+          <li>Describe individual tests as features in English, instead of implementation detail</li>
+          <li>
+            <pre><code class="language-javascript">"it should add a new todo item"
+vs
+"ng-click pushes new todo into $scope.todos"
+</code></pre>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Tools</h2>
+        <h3 class="bullet"></h3>
+        <ul>
+          <li><a href="http://jasmine.github.io/" target="_blank">Jasmine</a>, for describing tests</li>
+          <li><a href="http://karma-runner.github.io/0.13/index.html">Karma</a>, for unit tests</li>
+          <li><a href="http://www.protractortest.org/" target="_blank">Protractor</a>, for end-to-end tests</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Jasmine</h2>
+        <pre><code class="language-javascript">describe('Calculator', function() {
+  describe('Addition', function() {
+    it('should add integers', function() {
+      expect(1 + 2).toBe(3);
+    });
+  });
+  describe('Subtraction', function() {
+    it('should substract reals', function() {
+      expect('5.5-3.4').toBeCloseTo(2.1);
+    });
+  });
+});
+</code></pre>
       </section>
       <section>
         <h2>Syntax Highlighting</h2>
