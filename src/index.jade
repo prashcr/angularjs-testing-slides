@@ -28,14 +28,6 @@ html
         ul
           li
             img(src='https://lh5.googleusercontent.com/-2avOSLXBtRo/VVF97CVqKlI/AAAAAAAABcc/wYjDPRC0CFk/w638-h86-no/Untitled%2Bdrawing.png')
-          li Behavior Driven Development (BDD)?
-          li Describe individual tests as features in English, instead of implementation detail
-          li
-            pre
-              code.language-javascript. 
-                "it should add a new todo item"
-                vs
-                "ng-click pushes new todo into $scope.todos"
 
       section
         h2 Tools
@@ -45,7 +37,7 @@ html
             a(href='http://jasmine.github.io/' target='_blank') Jasmine
             , for describing tests
           li
-            a(href='http://karma-runner.github.io/0.13/index.html') Karma
+            a(href='http://karma-runner.github.io/0.13/index.html' target='_blank') Karma
             , for unit tests
           li
             a(href='http://www.protractortest.org/' target='_blank') Protractor
@@ -55,18 +47,73 @@ html
         h2 Jasmine
         pre
           code.language-javascript.
-            describe('Calculator', function() {
-              describe('Addition', function() {
-                it('should add integers', function() {
-                  expect(1 + 2).toBe(3);
-                });
+            function helloworld() {return 'Hello world!'}
+            describe('Hello world', function() { // suite
+              it('says hello', function() { // spec
+                expect(helloworld()).toBe('Hello world!');
               });
-              describe('Subtraction', function() {
-                it('should substract reals', function() {
-                  expect('5.5-3.4').toBeCloseTo(2.1);
+            });
+
+      section
+        h2 Jasmine
+        h3.bullet Try it out
+        ul
+          li Download latest standalone: <a href="https://github.com/jasmine/jasmine/releases" target="_blank">https://github.com/jasmine/jasmine/releases</a>
+          li <code>rm -rf spec/* src/*</code> <small>delete the contents of the two folders</small>
+          li Put your own files in there, and include them in <code>SpecRunner.html</code> as indicated.
+          li Reference: <a href="http://jasmine.github.io/2.3/introduction.html" target="_blank">http://jasmine.github.io/2.3/introduction.html</a>
+          li 1 hour course on Jasmine: <a href="https://www.udacity.com/course/javascript-testing--ud549" target="_blank">https://www.udacity.com/course/javascript-testing--ud549</a>
+
+      section
+        h2 Jasmine + AngularJS
+        pre
+          code.language-javascript.
+            angular.module('app', [])
+            .controller('PasswordController', function PasswordController($scope) {
+              $scope.password = '';
+              $scope.grade = function() {
+                var size = $scope.password.length;
+                if (size > 8) {
+                  $scope.strength = 'strong';
+                } else if (size > 3) {
+                  $scope.strength = 'medium';
+                } else {
+                  $scope.strength = 'weak';
+                }
+              };
+            });
+
+      section
+        h2 Jasmine + AngularJS
+        pre
+          code.language-javascript.
+            describe('PasswordController', function() {
+              beforeEach(module('app'));
+
+              var $controller;
+
+              beforeEach(inject(function(_$controller_){
+                // The injector unwraps the underscores (_)
+                // from around the parameter names when matching
+                $controller = _$controller_;
+              }));
+
+              describe('$scope.grade', function() {
+                it('sets the strength to "strong" ' 
+                + 'if the password length is >8 chars', function() {
+                  var $scope = {};
+                  var controller = $controller('PasswordController', { $scope: $scope });
+                  $scope.password = 'longerthaneightchars';
+                  $scope.grade();
+                  expect($scope.strength).toEqual('strong');
                 });
               });
             });
+
+      section
+        h2 Karma
+        img(src='https://scriptcat.files.wordpress.com/2012/01/frankly-seems-everything-workplace-ecard-someecards.jpg')
+
 
       section
         h2 Syntax Highlighting
