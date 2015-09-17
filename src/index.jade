@@ -67,10 +67,12 @@ html
 
       section(data-bespoke-backdrop='emphatic')
         h2 Controller Testing
+        h3 app.js
         pre
           code.language-javascript.
-            angular.module('app', [])
-            .controller('PasswordController', function PasswordController($scope) {
+            var app = angular.module('myApp', []);
+            
+            app.controller('PasswordCtrl', function PasswordCtrl($scope) {
               $scope.password = '';
               $scope.grade = function() {
                 var size = $scope.password.length;
@@ -86,16 +88,15 @@ html
 
       section(data-bespoke-backdrop='emphatic')
         h2 Controller Testing
+        h3 controllers-test.js
         pre
           code.language-javascript.
-            describe('PasswordController', function() {
-              beforeEach(module('app'));
+            describe('PasswordCtrl', function() {
+              beforeEach(module('myApp'));
 
               var $controller;
 
               beforeEach(inject(function(_$controller_){
-                // The injector unwraps the underscores (_)
-                // from around the parameter names when matching
                 $controller = _$controller_;
               }));
 
@@ -104,7 +105,7 @@ html
 
                 beforeEach(function() {
                   $scope = {};
-                  controller = $controller('PasswordController', {$scope: $scope});
+                  controller = $controller('PasswordCtrl', {$scope: $scope});
                 })
 
                 it('sets the strength to "strong" ' +
@@ -123,12 +124,6 @@ html
             });
 
       section(data-bespoke-backdrop='emphatic')
-        h2 Filter Testing
-        pre
-          code.language-javascript.
-            Coming soon.
-
-      section(data-bespoke-backdrop='emphatic')
         h2 Karma
         h3
         img(src='https://scriptcat.files.wordpress.com/2012/01/frankly-seems-everything-workplace-ecard-someecards.jpg')
@@ -137,8 +132,44 @@ html
         h2 Karma
         pre
           code.language-bash.
-            echo {} > package.json
-            npm install -g karma-cli
-            npm install --save-dev karma karma-jasmine karma-chrome-launcher
+            $ echo {} > package.json
+            $ npm install -g karma-cli
+            $ npm install --save-dev karma karma-jasmine karma-phantomjs-launcher
+            $ karma init
+
+      section(data-bespoke-backdrop='emphatic')
+        h2 Filter Testing
+        h3 app.js
+        pre
+          code.language-javascript.
+            app.filter('length', function() {
+              return function(text) {
+                return ('' + (text || '')).length;
+              }
+            });
+
+      section(data-bespoke-backdrop='emphatic')
+        h2 Filter Testing
+        h3 filters-test.js
+        pre
+          code.language-javascript.
+            describe('length filter', function() {
+
+              var $filter;
+
+              beforeEach(inject(function(_$filter_){
+                $filter = _$filter_;
+              }));
+
+              it('returns 0 when given null', function() {
+                var length = $filter('length');
+                expect(length(null)).toEqual(0);
+              });
+
+              it('returns the correct value when given a string of chars', function() {
+                var length = $filter('length');
+                expect(length('abc')).toEqual(3);
+              });
+            });
 
     script(src='build/build.js')
