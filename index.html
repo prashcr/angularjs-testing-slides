@@ -22,10 +22,7 @@
       </section>
       <section data-bespoke-backdrop="emphatic">
         <h2>What is Test Driven Development (TDD)?</h2>
-        <h3 class="bullet"></h3>
-        <ul>
-          <li><img src="https://lh5.googleusercontent.com/-2avOSLXBtRo/VVF97CVqKlI/AAAAAAAABcc/wYjDPRC0CFk/w638-h86-no/Untitled%2Bdrawing.png"></li>
-        </ul>
+        <h3></h3><img src="https://lh5.googleusercontent.com/-2avOSLXBtRo/VVF97CVqKlI/AAAAAAAABcc/wYjDPRC0CFk/w638-h86-no/Untitled%2Bdrawing.png">
       </section>
       <section data-bespoke-backdrop="emphatic">
         <h2>Tools</h2>
@@ -34,8 +31,10 @@
           <li><a href="http://jasmine.github.io/" target="_blank">Jasmine</a>, for describing tests</li>
           <li><a href="http://karma-runner.github.io/0.13/index.html" target="_blank">Karma</a>, for unit tests</li>
           <li><a href="http://www.protractortest.org/" target="_blank">Protractor</a>, for end-to-end tests</li>
+          <li><a href="https://www.npmjs.com/" target="_blank">npm</a>, Node.js package manager</li>
         </ul>
       </section>
+      <section data-bespoke-backdrop="emphatic"><img src="https://rocketeer.be/wp-content/uploads/2014/03/ngmeetup-testing.014.jpg" width="85%"><a href="http://stackoverflow.com/a/5357837/4131237" target="_blank">Brief summary</a></section>
       <section data-bespoke-backdrop="emphatic">
         <h2>Jasmine</h2>
         <pre><code class="language-javascript">function helloworld() {return 'Hello world!'}
@@ -51,14 +50,14 @@ describe('Hello world', function() { // suite
         <h3 class="bullet">Try it out</h3>
         <ul>
           <li>Download latest standalone: <a href="https://github.com/jasmine/jasmine/releases" target="_blank">https://github.com/jasmine/jasmine/releases</a></li>
-          <li><code>rm -rf spec/* src/*</code> <small>delete the contents of the two folders</small></li>
+          <li><code>rm spec/* src/*</code> <small>delete the contents of the two folders</small></li>
           <li>Put your own files in there, and include them in <code>SpecRunner.html</code> as indicated.</li>
           <li>Reference: <a href="http://jasmine.github.io/2.3/introduction.html" target="_blank">http://jasmine.github.io/2.3/introduction.html</a></li>
-          <li>1 hour course on Jasmine: <a href="https://www.udacity.com/course/javascript-testing--ud549" target="_blank">https://www.udacity.com/course/javascript-testing--ud549</a></li>
+          <li><small><strong>Optional</strong></small> 1 hour course on Jasmine: <a href="https://www.udacity.com/course/javascript-testing--ud549" target="_blank">https://www.udacity.com/course/javascript-testing--ud549</a></li>
         </ul>
       </section>
       <section data-bespoke-backdrop="emphatic">
-        <h2>Jasmine + AngularJS</h2>
+        <h2>Controller Testing</h2>
         <pre><code class="language-javascript">angular.module('app', [])
 .controller('PasswordController', function PasswordController($scope) {
   $scope.password = '';
@@ -76,7 +75,7 @@ describe('Hello world', function() { // suite
 </code></pre>
       </section>
       <section data-bespoke-backdrop="emphatic">
-        <h2>Jasmine + AngularJS</h2>
+        <h2>Controller Testing</h2>
         <pre><code class="language-javascript">describe('PasswordController', function() {
   beforeEach(module('app'));
   
@@ -89,51 +88,44 @@ describe('Hello world', function() { // suite
   }));
   
   describe('$scope.grade', function() {
-    it('sets the strength to "strong" ' 
-    + 'if the password length is >8 chars', function() {
-      var $scope = {};
-      var controller = $controller('PasswordController', { $scope: $scope });
+    var $scope, controller;
+    
+    beforeEach(function() {
+      $scope = {};
+      controller = $controller('PasswordController', {$scope: $scope});
+    })
+    
+    it('sets the strength to "strong" ' +
+    'if the password length is >8 chars', function() {
       $scope.password = 'longerthaneightchars';
       $scope.grade();
       expect($scope.strength).toEqual('strong');
+    });
+    it('sets the strength to "weak" ' +
+    'if the password length <3 chars', function() {
+      $scope.password = 'a';
+      $scope.grade();
+      expect($scope.strength).toEqual('weak');
     });
   });
 });
 </code></pre>
       </section>
       <section data-bespoke-backdrop="emphatic">
-        <h2>Karma</h2><img src="https://scriptcat.files.wordpress.com/2012/01/frankly-seems-everything-workplace-ecard-someecards.jpg">
-      </section>
-      <section data-bespoke-backdrop="emphatic">
-        <h2>Syntax Highlighting</h2>
-        <h3>Powered by <a href="http://twitter.com/LeaVerou">Lea Verou</a>'s <a href="https://github.com/LeaVerou/prism">Prism</a></h3>
-        <pre><code class="language-javascript">bespoke.from('article', [
-  classes(),
-  keys(),
-  touch(),
-  bullets('li, .bullet')
-]);
+        <h2>Filter Testing</h2>
+        <pre><code class="language-javascript">Coming soon.
 </code></pre>
       </section>
-      <section data-bespoke-hash="named-route">
-        <h2>Named Route</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-hash">bespoke-hash</a></h3>
-        <p>Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.</p>
+      <section data-bespoke-backdrop="emphatic">
+        <h2>Karma</h2>
+        <h3></h3><img src="https://scriptcat.files.wordpress.com/2012/01/frankly-seems-everything-workplace-ecard-someecards.jpg">
       </section>
-      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
-        <h2>Emphatic Slide!</h2>
-        <h3>Powered by <a href="https://github.com/markdalgleish/bespoke-backdrop">bespoke-backdrop</a></h3>
-      </section>
-      <section>
-        <h2 class="bullet">Just the beginning...</h2><br>
-        <ul>
-          <li>Edit <a href="http://jade-lang.com/">Jade</a> markup in <em>'src/index.jade'</em></li>
-          <li>Edit <a href="http://learnboost.github.io/stylus/">Stylus</a> styles in <em>'src/styles/main.styl'</em></li>
-          <li>Edit JavaScript in <em>'src/scripts/main.js'</em></li>
-        </ul><br>
-        <ul>
-          <li><strong>Enjoy! :)</strong><a href="http://twitter.com/markdalgleish"> -@markdalgleish</a></li>
-        </ul>
+      <section data-bespoke-backdrop="emphatic">
+        <h2>Karma</h2>
+        <pre><code class="language-bash">echo {} > package.json
+npm install -g karma-cli
+npm install --save-dev karma karma-jasmine karma-chrome-launcher
+</code></pre>
       </section>
     </article>
     <script src="build/build.js"></script>
