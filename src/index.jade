@@ -88,15 +88,20 @@ html
 
       section(data-bespoke-backdrop='emphatic')
         h2 Controller Testing
-        h3 controllers-test.js
+        h3 controller-tests.js
         pre
           code.language-javascript.
             describe('PasswordCtrl', function() {
+              // Instantiate myApp module, which contains the controller
               beforeEach(module('myApp'));
 
               var $controller;
 
+              // Store reference to $controller
+              // So that it's available to all specs in this suite
               beforeEach(inject(function(_$controller_){
+                // The injector unwraps the underscores (_)
+                // from around the parameter names when matching
                 $controller = _$controller_;
               }));
 
@@ -125,21 +130,17 @@ html
 
       section(data-bespoke-backdrop='emphatic')
         h2 Karma
-        h3
-        img(src='https://scriptcat.files.wordpress.com/2012/01/frankly-seems-everything-workplace-ecard-someecards.jpg')
-
-      section(data-bespoke-backdrop='emphatic')
-        h2 Karma
+        h3 Installation
         pre
           code.language-bash.
             $ echo {} > package.json
             $ npm install -g karma-cli
-            $ npm install --save-dev karma karma-jasmine karma-phantomjs-launcher
+            $ npm install --save-dev karma karma-jasmine karma-chrome-launcher karma-coverage
             $ karma init
 
       section(data-bespoke-backdrop='emphatic')
         h2 Filter Testing
-        h3 app.js
+        h3 filters.js
         pre
           code.language-javascript.
             app.filter('length', function() {
@@ -150,11 +151,10 @@ html
 
       section(data-bespoke-backdrop='emphatic')
         h2 Filter Testing
-        h3 filters-test.js
+        h3 filter-tests.js
         pre
           code.language-javascript.
             describe('length filter', function() {
-
               var $filter;
 
               beforeEach(inject(function(_$filter_){
@@ -171,5 +171,59 @@ html
                 expect(length('abc')).toEqual(3);
               });
             });
+
+      section(data-bespoke-backdrop='emphatic')
+        h2 Directive Testing
+        h3 app.js
+        pre
+          code.language-javascript.
+            app.directive('latestRelease', function () {
+              return {
+                restrict: 'E',
+                replace: true,
+                template: '<h3>AngularJS {{"1." + "4." + "5"}}</h3>'
+              };
+            });
+
+      section(data-bespoke-backdrop='emphatic')
+        h2 Directive Testing
+        h3 directive-tests.js
+        pre
+          code.language-javascript.
+            describe('Unit testing latestRelease', function() {
+              var $compile;
+              var $rootScope;
+
+              beforeEach(module('myApp'));
+
+              beforeEach(inject(function(_$compile_, _$rootScope_){
+                $compile = _$compile_;
+                $rootScope = _$rootScope_;
+              }));
+
+              it('Replaces the element with the appropriate content', function() {
+                // Compile a piece of HTML containing the directive
+                var element = $compile("&lt;latest-release&gt;&lt;/latest-release&gt;")($rootScope);
+                // fire all the watches, so the scope expression 
+                // {{"1." + "4." + "5"}} will be evaluated
+                $rootScope.$digest();
+                // Check that the compiled element contains the templated content
+                expect(element.html()).toContain("AngularJS 1.4.5");
+              });
+            });
+
+      section(data-bespoke-backdrop='emphatic')
+        h2 E2E Testing
+        h3 Installation
+        pre
+          code.language-bash.
+            $ npm install -g protractor
+            $ webdriver-manager update && webdriver-manager start
+            // This starts a Selenium server. 
+            // Protractor will connect to and run tests on this server
+            $ protractor protractor.conf.js
+
+      section(data-bespoke-backdrop='emphatic')
+        h2 E2E Testing
 
     script(src='build/build.js')
