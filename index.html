@@ -78,13 +78,18 @@ app.controller('PasswordCtrl', function PasswordCtrl($scope) {
       </section>
       <section data-bespoke-backdrop="emphatic">
         <h2>Controller Testing</h2>
-        <h3>controllers-test.js</h3>
+        <h3>controller-tests.js</h3>
         <pre><code class="language-javascript">describe('PasswordCtrl', function() {
+  // Instantiate myApp module, which contains the controller
   beforeEach(module('myApp'));
   
   var $controller;
   
+  // Store reference to $controller
+  // So that it's available to all specs in this suite
   beforeEach(inject(function(_$controller_){
+    // The injector unwraps the underscores (_)
+    // from around the parameter names when matching
     $controller = _$controller_;
   }));
   
@@ -114,19 +119,16 @@ app.controller('PasswordCtrl', function PasswordCtrl($scope) {
       </section>
       <section data-bespoke-backdrop="emphatic">
         <h2>Karma</h2>
-        <h3></h3><img src="https://scriptcat.files.wordpress.com/2012/01/frankly-seems-everything-workplace-ecard-someecards.jpg">
-      </section>
-      <section data-bespoke-backdrop="emphatic">
-        <h2>Karma</h2>
+        <h3>Installation</h3>
         <pre><code class="language-bash">$ echo {} > package.json
 $ npm install -g karma-cli
-$ npm install --save-dev karma karma-jasmine karma-phantomjs-launcher
+$ npm install --save-dev karma karma-jasmine karma-chrome-launcher karma-coverage
 $ karma init
 </code></pre>
       </section>
       <section data-bespoke-backdrop="emphatic">
         <h2>Filter Testing</h2>
-        <h3>app.js</h3>
+        <h3>filters.js</h3>
         <pre><code class="language-javascript">app.filter('length', function() {
   return function(text) {
     return ('' + (text || '')).length;
@@ -136,9 +138,8 @@ $ karma init
       </section>
       <section data-bespoke-backdrop="emphatic">
         <h2>Filter Testing</h2>
-        <h3>filters-test.js</h3>
+        <h3>filter-tests.js</h3>
         <pre><code class="language-javascript">describe('length filter', function() {
-
   var $filter;
   
   beforeEach(inject(function(_$filter_){
@@ -156,6 +157,57 @@ $ karma init
   });
 });
 </code></pre>
+      </section>
+      <section data-bespoke-backdrop="emphatic">
+        <h2>Directive Testing</h2>
+        <h3>app.js</h3>
+        <pre><code class="language-javascript">app.directive('latestRelease', function () {
+  return {
+    restrict: 'E',
+    replace: true,
+    template: '<h3>AngularJS {{"1." + "4." + "5"}}</h3>'
+  };
+});
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="emphatic">
+        <h2>Directive Testing</h2>
+        <h3>directive-tests.js</h3>
+        <pre><code class="language-javascript">describe('Unit testing latestRelease', function() {
+  var $compile;
+  var $rootScope;
+  
+  beforeEach(module('myApp'));
+  
+  beforeEach(inject(function(_$compile_, _$rootScope_){
+    $compile = _$compile_;
+    $rootScope = _$rootScope_;
+  }));
+  
+  it('Replaces the element with the appropriate content', function() {
+    // Compile a piece of HTML containing the directive
+    var element = $compile("&lt;latest-release&gt;&lt;/latest-release&gt;")($rootScope);
+    // fire all the watches, so the scope expression 
+    // {{"1." + "4." + "5"}} will be evaluated
+    $rootScope.$digest();
+    // Check that the compiled element contains the templated content
+    expect(element.html()).toContain("AngularJS 1.4.5");
+  });
+});
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="emphatic">
+        <h2>E2E Testing</h2>
+        <h3>Installation</h3>
+        <pre><code class="language-bash">$ npm install -g protractor
+$ webdriver-manager update && webdriver-manager start
+// This starts a Selenium server. 
+// Protractor will connect to and run tests on this server
+$ protractor protractor.conf.js
+</code></pre>
+      </section>
+      <section data-bespoke-backdrop="emphatic">
+        <h2>E2E Testing</h2>
       </section>
     </article>
     <script src="build/build.js"></script>
