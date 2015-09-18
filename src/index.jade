@@ -15,6 +15,14 @@ html
         h1 AngularJS Testing
 
       section(data-bespoke-backdrop='emphatic')
+        h2 AngularJS
+        h3.bullet Tutorials
+        ul
+          li <a href="https://www.codeschool.com/courses/shaping-up-with-angular-js" target="_blank">CodeSchool</a>: Doesn't go too deep but great explanations
+          li <a href="https://www.codecademy.com/courses/learn-angularjs" target="_blank">Codecademy</a>: Goes deeper, but with less explanation
+          li <a href="https://thinkster.io/a-better-way-to-learn-angularjs/" target="_blank">Thinkster</a>: Even more in-depth
+
+      section(data-bespoke-backdrop='emphatic')
         h2 Why should I test?
         h3.bullet
         ul
@@ -32,11 +40,11 @@ html
         h3.bullet
         ul
           li
-            <a href="http://jasmine.github.io/" target="_blank">Jasmine</a>, for describing tests
+            <a href="http://jasmine.github.io/" target="_blank">Jasmine</a>, test framework for describing tests
           li
-            <a href="http://karma-runner.github.io/0.13/index.html" target="_blank">Karma</a>, for unit tests
+            <a href="http://karma-runner.github.io/0.13/index.html" target="_blank">Karma</a>, test runner for unit tests
           li
-            <a href="http://www.protractortest.org/" target="_blank">Protractor</a>, for end-to-end tests
+            <a href="http://www.protractortest.org/" target="_blank">Protractor</a>, test runner for end-to-end tests
           li
             <a href="https://www.npmjs.com/" target="_blank">npm</a>, Node.js package manager
 
@@ -214,16 +222,44 @@ html
 
       section(data-bespoke-backdrop='emphatic')
         h2 E2E Testing
+        h3 How does Protractor work?
+        img(src='http://www.protractortest.org/img/components.png')
+        h3 Protractor <a href="https://angular.github.io/protractor/#/api" target="_blank">API Reference</a>
+        h3 Protractor <a href="https://github.com/angular/angular-seed/blob/master/e2e-tests/scenarios.js" target="_blank">example</a>
+
+      section(data-bespoke-backdrop='emphatic')
+        h2 E2E Testing
         h3 Installation
         pre
           code.language-bash.
             $ npm install -g protractor
-            $ webdriver-manager update && webdriver-manager start
             // This starts a Selenium server. 
             // Protractor will connect to and run tests on this server
+            $ webdriver-manager update && webdriver-manager start
+            // Host our app locally with http-server
+            $ npm start
+            // After writing tests
             $ protractor protractor.conf.js
 
       section(data-bespoke-backdrop='emphatic')
         h2 E2E Testing
+        h3 scenarios.js
+        pre
+          code.language-javascript.
+            describe('Testing QuestionsJs', function() {
+              beforeEach(function() {
+                browser.get('http://localhost:8000');
+              });
+
+              it('should have the correct header', function() {
+                var header = element(by.className('masthead-brand'));
+                expect(header.getText()).toEqual('Question Room');
+              });
+              describe('Chat rooms', function() {
+                xit('can join comp3111', function() {
+                  expect(true).toBe(true);
+                })
+              })
+            });
 
     script(src='build/build.js')
