@@ -1,4 +1,12 @@
 # AngularJS Testing
+
+My first attempt at using an HTML5 presentation framework (bespoke.js).
+
+It was a great experience, especially the fact that sharing the slides is as simple as sharing a URL.
+
+However, it came across as fragile (layout breaks too easily), and restrictive (lack of control).
+For future use, I'd definitely go for reveal.js
+
 > A [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) presentation, built with [generator-bespoke](https://github.com/markdalgleish/generator-bespoke)
 
 ## View slides locally
